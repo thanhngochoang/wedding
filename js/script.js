@@ -11,9 +11,12 @@ $(document).on('click', function(){
     // document.getElementById("my_audio").play();
     console.log('Welcome to our wedding!');
 });
+
 const param = new URLSearchParams(window.location.search);
-const name = param.get("v");
-document.getElementById("name").innerHTML = name ?? "Thành Hoàng";
+const nameLabel = param.get("v");
+const subTitle = param.get("s");
+document.getElementById("name").innerHTML = nameLabel ?? "Thành Hoàng";
+document.getElementById("subTitle").innerHTML = subTitle ?? "chị";
 // Set the date we're counting down to
 var countDownDate = new Date("Jan 4 2025 00:00:00").getTime();
 
@@ -87,7 +90,7 @@ document.getElementById('exportButton').addEventListener('click', function () {
     // Get image and text elements
     const img = document.getElementById('sourceImage');
     const text = document.getElementById('customText').textContent;
-    console.log(img, text);
+ 
     // Create canvas and set dimensions
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
