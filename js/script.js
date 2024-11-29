@@ -13,10 +13,11 @@ $(document).on('click', function(){
 });
 
 const param = new URLSearchParams(window.location.search);
-const nameLabel = param.get("v");
-const subTitle = param.get("s");
-document.getElementById("name").innerHTML = nameLabel ?? "Thành Hoàng";
-document.getElementById("subTitle").innerHTML = subTitle ?? "chị";
+const nameLabel = param.get("v") ?? "Thành Hoàng";
+const subTitle = param.get("s") ?? "anh";
+document.getElementById("name").innerHTML = nameLabel ;
+document.getElementById("subTitle").innerHTML = subTitle ;
+document.title = "💗 " + nameLabel + " | Thành 💗 Huệ"
 // Set the date we're counting down to
 var countDownDate = new Date("Jan 4 2025 00:00:00").getTime();
 
