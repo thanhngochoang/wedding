@@ -349,10 +349,27 @@
 
 
 /*******************************/
+:root {
+	--text-color: #342e2e;
+	--text-color-primary: #674ea7;
+
+}
+
+* {
+	
+	color: #342e2e;
+	font-family: "Josefin Sans", sans-serif;
+		font-optical-sizing: auto;
+}
 
 body {
-	font-family: Arial, Helvetica, Sans-serif, Corinthia;
-	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* height: 100vh;
+    width: 100%; */
+	flex-direction: column;
+	font-family: "Josefin Sans", Helvetica, Sans-serif, "Corinthia";
 }
 .text{
 	font-family: "Helvetica", cursive;
@@ -401,7 +418,7 @@ img {
 	font-style: normal;
 	font-size: 60px;
 	margin: 32px 0;
-	color: #674ea7;
+	color: var(--text-color-primary);
 }
 
 .title h2 {
@@ -420,7 +437,7 @@ img {
 	font-weight: bolder;
 	font-style: normal;
 	font-size: 32px;
-	color: #674ea7;
+	color: var(--text-color-primary);
 	margin: 16px;
 	text-align: center;
 }
@@ -430,12 +447,12 @@ img {
 	text-transform: uppercase;
 	letter-spacing: 5px;
 	font-size: 24px;
-	color: #674ea7;
+	color: var(--text-color-primary);
 	margin-top: 5px;
 }
 
 .title p {
-	color: #564861;
+	color: var(--text-color-primary);
 	font-family: "Helvetica", cursive;
 	margin: 30px 0 20px;
 	text-transform: uppercase;
@@ -460,20 +477,7 @@ img {
 
 /** **/
 
-* {
-	/* margin: 0;
-    padding: 0; */
-	font-family: 'Arvo', serif;
-}
 
-body {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	/* height: 100vh;
-    width: 100%; */
-	flex-direction: column;
-}
 
 .title {
 	margin-bottom: 40px;
@@ -511,7 +515,29 @@ body {
 	border-radius: 10px;
 	overflow: hidden;
 }
+.profile{
+	font-family: 'Segoe UI', sans-serif;
+	width: 100%;
+	display: inline-flex;
+	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+	
+	.left{
+		text-align: left;
+	}
+	.right{
+		text-align: right;
+	}
+}
+.box-container {
+	width: 100%;
 
+	
+}
+.box-container a span {
+	color: var(--text-color-primary) !important;
+}
 .block {
 	width: 180px;
 	height: 160px;
@@ -590,7 +616,9 @@ a {
 .twitter {
 	color: #874562;
 }
-
+.facebook{
+	color: #3448ff;
+}
 .music {
 	display: none;
 }
