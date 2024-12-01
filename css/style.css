@@ -370,6 +370,13 @@ body {
     width: 100%; */
 	flex-direction: column;
 	font-family: "Josefin Sans", Helvetica, Sans-serif, "Corinthia";
+
+	
+}
+.body-bg {
+	background-image: url('/assets/img/bg.jpg');
+	background-size: cover;
+	background-position: center;
 }
 .text{
 	font-family: "Helvetica", cursive;
