@@ -8,7 +8,7 @@
 
 
 $(document).on('click', function(){
-    // document.getElementById("my_audio").play();
+    document.getElementById("my_audio").play();
     console.log('Welcome to our wedding!');
 });
 $(document).ready(function () {
