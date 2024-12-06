@@ -537,11 +537,7 @@ img {
 		text-align: right;
 	}
 }
-.box-container {
-	width: 100%;
 
-	
-}
 .box-container a span {
 	color: var(--text-color-primary) !important;
 }
@@ -655,4 +651,34 @@ a {
 .input_wrapper .input-circle {
 	height: 100%;
 
+}
+.box-container-wrapper{
+	display: block;
+	align-items: center;
+		justify-content: space-between;
+		align-items: center;
+		text-align: center;
+	
+}
+.campus{
+	padding-left: 1.2rem;
+	padding-right: 1.2rem;
+}
+.w-100{
+	width: 100%;
+}
+.input-text{
+	border: 1px solid #ccc;
+	border-radius: 0.5rem;
+	padding: 0.5rem;
+}
+.input-text:focus-visible{
+	outline: none;
+}
+.p-t-1{
+	padding-top: 0.5rem;
+}
+
+.m-t-1 {
+	margin-top: 0.5rem;
 }

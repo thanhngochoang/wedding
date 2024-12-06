@@ -11,6 +11,9 @@ $(document).on('click', function(){
     // document.getElementById("my_audio").play();
     console.log('Welcome to our wedding!');
 });
+$(document).ready(function () {
+    fetchData();
+})
 
 const param = new URLSearchParams(window.location.search);
 const nameLabel = param.get("v") ?? "Thành Hoàng";
@@ -123,3 +126,71 @@ document.getElementById('exportButton').addEventListener('click', function () {
         }
    
 });
+
+document.getElementById('submitWish').addEventListener('click', () => {
+    const fieldName = document.getElementById('client');
+    const fieldContent = document.getElementById('contentMessage');
+    const data = {
+        nameData: fieldName.value,
+        contentData: fieldContent.value,
+    };
+    console.log(data);
+    // check field required
+    if (data.nameData && data.contentData) {
+        submitForm(data);
+    }
+});
+async function fetchData() {
+
+    // const url ='https://docs.google.com/spreadsheets/d/e//pubhtml?gid=1365598803&single=true';
+    const sheetId = "1j3FAQKbta1uUUINPo1l_udiEe7b7OPlkVzrukPn8zcg"; // Replace with your Sheet ID
+    const apiKey = "AIzaSyBGnmaPsJMaMu9b-wJllFb9DZB83Rtsy1U";   // Replace with your Google API Key
+    const range = "Sheet1!A2:C";    // Adjust the range to your data
+    //https://docs.google.com/spreadsheets/d/1j3FAQKbta1uUUINPo1l_udiEe7b7OPlkVzrukPn8zcg/edit?usp=sharing
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
+    async function fetchWish() {
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            // Render the data
+            const rows = data.values || [];
+            const table = document.createElement("table");
+            rows.forEach((row) => {
+                const tr = document.createElement("tr");
+                row.forEach((cell) => {
+                    const td = document.createElement("td");
+                    td.textContent = cell;
+                    tr.appendChild(td);
+                });
+                table.appendChild(tr);
+            });
+            console.log(table);
+            // document.getElementById("sheet-data").appendChild(table);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    }
+    fetchWish();
+
+}
+
+async function submitForm(data) {
+    const formURL = 'https://docs.google.com/forms/d/e/1FAIpQLSd6Fv_Sn8Hm4ey2euP0hLGpOf39JVe8_mVmYVyTEusyJvfeMA/formResponse';
+    const fieldName = 'entry.1036395145';
+    const fieldContent = 'entry.2127760744';
+    const formData = new FormData();
+
+    formData.append(fieldName, data.nameData);
+    formData.append(fieldContent, data.contentData);
+    const urlEncodedData = new URLSearchParams(formData).toString();
+
+    await fetch(formURL, {
+        method: 'POST',
+        body: urlEncodedData,
+        mode: "no-cors" ,
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        }
+    });
+}
