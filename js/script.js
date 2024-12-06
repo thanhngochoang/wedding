@@ -8,16 +8,35 @@
 
 
 $(document).on('click', function(){
-    document.getElementById("my_audio").play();
+    autoPlay();
     console.log('Welcome to our wedding!');
 });
 $(document).ready(function () {
     fetchData();
 })
 
+function autoPlay() {
+   
+    const audio =   document.getElementById("my_audio");
+    const increaseVolume = () => {
+        const interval = setInterval(() => {
+            if (audio.volume < 1) { 
+                audio.volume = Math.min(audio.volume + 0.02, 1);
+            } else {
+                clearInterval(interval); 
+            }
+        }, 200); 
+    };
+    audio.volume = 0.4;
+    audio.play().then(() => {
+        increaseVolume();
+    }).catch(error => {
+        console.warn("Trình duyệt chặn tự động phát:", error);
+    });
+}
 const param = new URLSearchParams(window.location.search);
-const nameLabel = param.get("v") ?? "Thành Hoàng";
-const subTitle = param.get("s") ?? "anh";
+const nameLabel = param.get("v") ?? "Anh/Chị";
+const subTitle = param.get("s") ?? "quí";
 document.getElementById("name").innerHTML = nameLabel ;
 document.getElementById("subTitle").innerHTML = subTitle ;
 document.title = "💗 " + nameLabel + " | Thành 💗 Huệ"
