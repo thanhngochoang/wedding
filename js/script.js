@@ -90,35 +90,36 @@ console.log(
 document.getElementById('exportButton').addEventListener('click', function () {
     // Get image and text elements
     const img = document.getElementById('sourceImage');
-    const text = document.getElementById('customText').textContent;
- 
+    const text = subTitle + " " + nameLabel;
+
     // Create canvas and set dimensions
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
     canvas.width = img.width;
     canvas.height = img.height;
 
-    // Draw image on canvas
-    img.onload = () => {
-        context.drawImage(img, 0, 0);
+        // Draw the image on the canvas
+        img.onload = () => {
+            context.drawImage(img, 0, 0);
 
-        // Set text properties
-        context.font = '40px Corinthia';
-        context.fillStyle = '#674ea7';
-        context.textAlign = 'center';
+            // Set text properties
+            context.font = '40px Dancing Script';
+            context.fillStyle = '#674ea7';
+            context.textAlign = 'center';
 
-        // Add text below the image
-        context.fillText(text, canvas.width / 2 + 30, img.height/2 + 30);
+            // Add text to the canvas
+            context.fillText(text, canvas.width / 2, img.height / 2 + 30);
 
-        // Create downloadable image
-        const link = document.createElement('a');
-        link.download = text+'.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-    };
+            // Create downloadable image
+            const link = document.createElement('a');
+            link.download = text + '.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        };
 
-    // Trigger image load in case it hasn't already loaded
-    if (img.complete) {
-        img.onload();
-    }
+        // Trigger image load in case it hasn't already loaded
+        if (img.complete) {
+            img.onload();
+        }
+   
 });
