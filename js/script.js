@@ -169,7 +169,6 @@ async function fetchData() {
         try {
             const response = await fetch(url);
             const data = await response.json();
-
             // Render the data
             const rows = data.values || [];
             const table = document.createElement("table");

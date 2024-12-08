@@ -1,8 +1,12 @@
-{ "scripts": {
-  "job": "javascript-obfuscator",
-  "build": "javascript-obfuscator ./js/script.js --output ./js/script.min.js"
-},
-  "dependencies": {
+{
+  "scripts": {
+    "start": "http-server -o ./",
+    "build": "javascript-obfuscator ./js/script.js --output ./js/script.min.js",
+    "watch": "chokidar './js/script.js' -c 'yarn build'"
+  },
+  "devDependencies": {
+    "chokidar-cli": "^3.0.0",
+     "http-server": "^14.1.1",
     "javascript-obfuscator": "^4.1.1"
   }
 }
