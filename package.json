@@ -1,0 +1,8 @@
+{ "scripts": {
+  "job": "javascript-obfuscator",
+  "build": "javascript-obfuscator ./js/script.js --output ./js/script.min.js"
+},
+  "dependencies": {
+    "javascript-obfuscator": "^4.1.1"
+  }
+}

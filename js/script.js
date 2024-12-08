@@ -125,12 +125,12 @@ document.getElementById('exportButton').addEventListener('click', function () {
             context.drawImage(img, 0, 0);
 
             // Set text properties
-            context.font = '40px Dancing Script';
-            context.fillStyle = '#674ea7';
+            context.font = '135px Dancing Script';
+            context.fillStyle = '#b33a46';
             context.textAlign = 'center';
 
             // Add text to the canvas
-            context.fillText(text, canvas.width / 2, img.height / 2 + 30);
+            context.fillText(text, canvas.width / 2, 3590);
 
             // Create downloadable image
             const link = document.createElement('a');
@@ -161,11 +161,9 @@ document.getElementById('submitWish').addEventListener('click', () => {
 });
 async function fetchData() {
 
-    // const url ='https://docs.google.com/spreadsheets/d/e//pubhtml?gid=1365598803&single=true';
-    const sheetId = "1j3FAQKbta1uUUINPo1l_udiEe7b7OPlkVzrukPn8zcg"; // Replace with your Sheet ID
-    const apiKey = "AIzaSyBGnmaPsJMaMu9b-wJllFb9DZB83Rtsy1U";   // Replace with your Google API Key
-    const range = "Sheet1!A2:C";    // Adjust the range to your data
-    //https://docs.google.com/spreadsheets/d/1j3FAQKbta1uUUINPo1l_udiEe7b7OPlkVzrukPn8zcg/edit?usp=sharing
+    const sheetId = "1j3FAQKbta1uUUINPo1l_udiEe7b7OPlkVzrukPn8zcg"; 
+    const apiKey = "AIzaSyBGnmaPsJMaMu9b-wJllFb9DZB83Rtsy1U";   
+    const range = "Sheet1!A2:C";   
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
     async function fetchWish() {
         try {
