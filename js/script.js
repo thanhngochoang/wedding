@@ -112,44 +112,66 @@ console.log(
     `%cMr. Dark!\n\n`,
     'color: yellow; background:tomato; font-size: 24pt; font-weight: bold',
 )
-
-const exportImg =  function () {
+const exportImg = function () {
     if (exported) return;
-    // Get image and text elements
     const img = document.getElementById('sourceImage');
-    const text = subTitle + " " + nameLabel;
+    if (!img) {
+        console.error('Image not found');
+        return;
+    }
 
-    // Create canvas and set dimensions
+    const text = `${subTitle} ${nameLabel}`;
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
     canvas.width = img.width;
     canvas.height = img.height;
 
-        // Draw the image on the canvas
-        img.onload = () => {
-            context.drawImage(img, 0, 0);
-            exported = 1;
-            // Set text properties
-            context.font = '135px Dancing Script';
-            context.fillStyle = '#b33a46';
-            context.textAlign = 'center';
+    const draw = () => {
+        context.drawImage(img, 0, 0);
+        context.font = '135px Dancing Script';
+        context.fillStyle = '#b33a46';
+        context.textAlign = 'center';
 
-            // Add text to the canvas
-            context.fillText(text, canvas.width / 2, 3590);
+        const textY = canvas.height * 0.9; // Adjust as needed
+        context.fillText(text, canvas.width / 2, textY);
 
-            // Create downloadable image
+        // Try to trigger download
+        try {
             const link = document.createElement('a');
-            link.download = text + '.png';
+            link.download = `${text}.png`;
             link.href = canvas.toDataURL('image/png');
-            link.click();
-        };
 
-        // Trigger image load in case it hasn't already loaded
-        if (img.complete) {
-            img.onload();
+            // Simulate click to download
+            link.click();
+
+            // Check if the browser supports downloads
+            if (!link.download) throw new Error('Download not supported');
+        } catch (e) {
+            console.warn('Download not supported, presenting the image instead.');
+
+            // Present the generated image as fallback
+            const imgPreview = document.createElement('img');
+            imgPreview.src = canvas.toDataURL('image/png');
+            imgPreview.style.maxWidth = '100%';
+            imgPreview.style.border = '1px solid #ccc';
+            imgPreview.alt = 'Generated Image';
+
+            // Add the preview to the document
+            const container = document.getElementById('imageContainer') || document.body;
+            container.appendChild(imgPreview);
         }
-   
+
+        exported = true;
+    };
+
+    if (img.complete) {
+        draw();
+    } else {
+        img.onload = draw;
+        img.onerror = () => console.error('Failed to load image');
+    }
 };
+
 
 document.getElementById('submitWish').addEventListener('click', () => {
     const fieldName = document.getElementById('client');
