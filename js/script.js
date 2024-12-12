@@ -9,12 +9,14 @@
 
 $(document).on('click', function(){
     autoPlay();
+    exportImg();
     console.log('Welcome to our wedding!');
 });
 $(document).ready(function () {
     fetchData();
+    $("a.smooth-scroll").on('click',smoothScroll);
 })
-
+let exported = 0;
 function autoPlay() {
    
     const audio =   document.getElementById("my_audio");
@@ -39,35 +41,37 @@ const nameLabel = param.get("v") ?? "Anh/Chị";
 const subTitle = param.get("s") ?? "quí";
 document.getElementById("name").innerHTML = nameLabel ;
 document.getElementById("subTitle").innerHTML = subTitle ;
-document.title = "💗 " + nameLabel + " | Thành 💗 Huệ"
+document.title = "💗 " + nameLabel + " | Thành 💗 Huệ";
+document.getElementById("client").value = subTitle + " " + nameLabel ;
 // Set the date we're counting down to
 var countDownDate = new Date("Jan 4 2025 00:00:00").getTime();
-
-// Update the count down every 1 second
-var x = setInterval(function() {
-
+const fetchTime= function(){
     // Get todays date and time
     var now = new Date().getTime();
-    
+
     // Find the distance between now and the count down date
     var distance = countDownDate - now;
-    
+
     // Time calculations for days, hours, minutes and seconds
     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
+
     // Output the result in an element with id="demo"
-    document.getElementById("time").innerHTML = "<div class='container'><div class='days block'>"+ days + "<br>Days</div>" + "<div class='hours block'>" + hours + "<br>Hours</div>" + "<div class='minutes block'>" + minutes + "<br>Minutes</div>" + "<div class='seconds block'>" + seconds + "<br>Seconds</div></div>";
-    
+    document.getElementById("time").innerHTML = "<div class='container'><div class='days block'>" + days + "<br>Days</div>" + "<div class='hours block'>" + hours + "<br>Hours</div>" + "<div class='minutes block'>" + minutes + "<br>Minutes</div>" + "<div class='seconds block'>" + seconds + "<br>Seconds</div></div>";
+
     // If the count down is over, write some text 
     if (distance < 0) {
         clearInterval(x);
         document.getElementById("time").innerHTML = "Bless the married couple for happy life!";
     }
+}
+// Update the count down every 1 second
+var x = setInterval(function() {
+    
 }, 1000);
-
+fetchTime();
 // being a bit cool :p  
 var styles = [
     'background: linear-gradient(#D33106, #571402)'
@@ -109,7 +113,8 @@ console.log(
     'color: yellow; background:tomato; font-size: 24pt; font-weight: bold',
 )
 
-document.getElementById('exportButton').addEventListener('click', function () {
+const exportImg =  function () {
+    if (exported) return;
     // Get image and text elements
     const img = document.getElementById('sourceImage');
     const text = subTitle + " " + nameLabel;
@@ -123,7 +128,7 @@ document.getElementById('exportButton').addEventListener('click', function () {
         // Draw the image on the canvas
         img.onload = () => {
             context.drawImage(img, 0, 0);
-
+            exported = 1;
             // Set text properties
             context.font = '135px Dancing Script';
             context.fillStyle = '#b33a46';
@@ -144,7 +149,7 @@ document.getElementById('exportButton').addEventListener('click', function () {
             img.onload();
         }
    
-});
+};
 
 document.getElementById('submitWish').addEventListener('click', () => {
     const fieldName = document.getElementById('client');
@@ -160,34 +165,52 @@ document.getElementById('submitWish').addEventListener('click', () => {
     }
 });
 async function fetchData() {
+    const mess = await fetchSheetData('Sheet1!A2:C');
+    const imgs = await fetchSheetData('Sheet2');
+    console.log(mess);
+    console.log(imgs);
+    
+}
+function smoothScroll(event) {
+    if (this.hash !== "") {
+        event.preventDefault();
+        const hash = this.hash;
+        $('html, body').animate({
+            scrollTop: $(hash).offset().top
+        }, 800, function () {
+            window.location.hash = hash;
+        });
+    }
+}
+async function fetchSheetData(range) {
 
     const sheetId = "1j3FAQKbta1uUUINPo1l_udiEe7b7OPlkVzrukPn8zcg"; 
-    const apiKey = "AIzaSyBGnmaPsJMaMu9b-wJllFb9DZB83Rtsy1U";   
-    const range = "Sheet1!A2:C";   
+    const apiKey = "AIzaSyBGnmaPsJMaMu9b-wJllFb9DZB83Rtsy1U"; 
+   // const range = "Sheet1!A2:C";    // Adjust the range to your data
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
-    async function fetchWish() {
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            // Render the data
-            const rows = data.values || [];
-            const table = document.createElement("table");
-            rows.forEach((row) => {
-                const tr = document.createElement("tr");
-                row.forEach((cell) => {
-                    const td = document.createElement("td");
-                    td.textContent = cell;
-                    tr.appendChild(td);
-                });
-                table.appendChild(tr);
-            });
-            console.log(table);
-            // document.getElementById("sheet-data").appendChild(table);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        // Render the data
+        const rows = data.values || [];
+        return rows;
+        // const table = document.createElement("table");
+        // rows.forEach((row) => {
+        //     const tr = document.createElement("tr");
+        //     row.forEach((cell) => {
+        //         const td = document.createElement("td");
+        //         td.textContent = cell;
+        //         tr.appendChild(td);
+        //     });
+        //     table.appendChild(tr);
+        // });
+        console.log(table);
+        // document.getElementById("sheet-data").appendChild(table);
+    } catch (error) {
+        console.error("Error fetching data:", error);
     }
-    fetchWish();
+
 
 }
 

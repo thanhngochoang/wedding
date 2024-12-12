@@ -509,6 +509,7 @@ img {
 	padding: 8px;
 	margin-right: 8px;
 	cursor: pointer;
+	border: none;
 }
 
 .venue a {
@@ -517,7 +518,7 @@ img {
 }
 
 .container {
-	display: grid;
+	display: inline-flex;
 	grid-template-columns: 1fr 1fr;
 	border-radius: 10px;
 	overflow: hidden;
@@ -543,7 +544,7 @@ img {
 }
 .block {
 	width: 180px;
-	height: 160px;
+	height: 65px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -592,7 +593,18 @@ img {
 .phone {
 	color: #874562
 }
-
+.main-container{
+	overflow-y: scroll;
+	overflow-x: hidden;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+.menu{
+	position: absolute;
+	bottom: 50%;
+}
 .end-msg {
 	width: auto;
 	height: auto;
@@ -660,10 +672,7 @@ a {
 		text-align: center;
 	
 }
-.campus{
-	padding-left: 1.2rem;
-	padding-right: 1.2rem;
-}
+
 .w-100{
 	width: 100%;
 }
@@ -675,10 +684,28 @@ a {
 .input-text:focus-visible{
 	outline: none;
 }
+.box-container-wrapper.sign{
+	width: 80%;
+}
 .p-t-1{
 	padding-top: 0.5rem;
+}
+.p-l-1{
+	padding-left: 0.5rem;
+}
+.p-r-1{
+	padding-right: 0.5rem;
 }
 
 .m-t-1 {
 	margin-top: 0.5rem;
+}
+.m-b-1 {
+	margin-bottom: 0.5rem;
+}
+.m-l-1 {
+	margin-left: 0.5rem;
+}
+.m-r-1 {
+	margin-right: 0.5rem;
 }
