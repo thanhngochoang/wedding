@@ -69,9 +69,9 @@ const fetchTime= function(){
 }
 // Update the count down every 1 second
 var x = setInterval(function() {
-    
+    fetchTime();
 }, 1000);
-fetchTime();
+
 // being a bit cool :p  
 var styles = [
     'background: linear-gradient(#D33106, #571402)'
