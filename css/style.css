@@ -356,10 +356,11 @@
 }
 
 * {
-	
+	--df-text-size:1.5vh;
 	color: #342e2e;
 	font-family: "Josefin Sans", sans-serif;
 		font-optical-sizing: auto;
+	font-size: var(--df-text-size);
 }
 
 body {
@@ -392,7 +393,7 @@ body {
 	font-weight: 400;
 }
 .font-normal{
-font-size: 40px;
+font-size: 3vw;
 }
 img {
 	max-width: 100%;
@@ -423,7 +424,7 @@ img {
 	font-family: 'Dancing Script', cursive;
 	font-weight: bold;
 	font-style: normal;
-	font-size: 60px;
+	font-size: 5vh;
 	margin: 32px 0;
 	color: var(--text-color-primary);
 }
@@ -434,7 +435,7 @@ img {
 	font-style: normal;
 	margin: 0;
 	padding: 0;
-	font-size: 24px;
+	font-size: 2.5vw;
 	color: #e25c67;
 	line-height: 1;
 }
@@ -443,7 +444,7 @@ img {
 	font-family: 'Dancing Script', cursive;
 	font-weight: bolder;
 	font-style: normal;
-	font-size: 32px;
+	font-size: 2.5vw;
 	color: var(--text-color-primary);
 	margin: 16px;
 	text-align: center;
@@ -453,7 +454,7 @@ img {
 	font-weight: 300;
 	text-transform: uppercase;
 	letter-spacing: 5px;
-	font-size: 24px;
+	font-size: 3vw;
 	color: var(--text-color-primary);
 	margin-top: 5px;
 }
@@ -464,7 +465,7 @@ img {
 	margin: 30px 0 20px;
 	text-transform: uppercase;
 	letter-spacing: 3px;
-	font-size: 16px;
+	font-size: 1.4vw;
 }
 
 .wrap {
@@ -487,13 +488,13 @@ img {
 
 
 .title {
-	margin-bottom: 40px;
+	margin-bottom: 7vw;
 }
 
 #time {
 	width: auto;
 	height: auto;
-	padding: 20px;
+	padding: 1rem;
 	background-color: #eee;
 	border-radius: 20px;
 	font-size: 16px;
@@ -543,8 +544,8 @@ img {
 	color: var(--text-color-primary) !important;
 }
 .block {
-	width: 180px;
-	height: 65px;
+	width: 20vw;
+	height: max(7vw, 30px);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -640,7 +641,7 @@ a {
 
 .actions {
 	display: flex;
-	font-size: 12px;
+	font-size: 2vw;
 	letter-spacing: 0pt;
 }
 

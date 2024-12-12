@@ -147,18 +147,11 @@ const exportImg = function () {
             // Check if the browser supports downloads
             if (!link.download) throw new Error('Download not supported');
         } catch (e) {
-            console.warn('Download not supported, presenting the image instead.');
+            console.warn('Download not supported, showing the image in the same element.');
 
-            // Present the generated image as fallback
-            const imgPreview = document.createElement('img');
-            imgPreview.src = canvas.toDataURL('image/png');
-            imgPreview.style.maxWidth = '100%';
-            imgPreview.style.border = '1px solid #ccc';
-            imgPreview.alt = 'Generated Image';
-
-            // Add the preview to the document
-            const container = document.getElementById('imageContainer') || document.body;
-            container.appendChild(imgPreview);
+            // Update the existing img element's source with the generated image
+            img.src = canvas.toDataURL('image/png');
+            $(img).parents('.body_wrapper').show();
         }
 
         exported = true;
@@ -171,6 +164,7 @@ const exportImg = function () {
         img.onerror = () => console.error('Failed to load image');
     }
 };
+
 
 
 document.getElementById('submitWish').addEventListener('click', () => {
