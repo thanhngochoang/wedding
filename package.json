@@ -1,12 +1,17 @@
 {
   "scripts": {
-    "start": "http-server -o ./",
-    "build": "javascript-obfuscator ./js/script.js --output ./js/script.min.js",
-    "watch": "chokidar './js/script.js' -c 'yarn build'"
+    "clean": "rm -f ./js/script.bundle.js ./js/script.min.js",
+    "bundle": "esbuild ./js/script.js --bundle --outfile=./js/script.bundle.js",
+    "obfuscate": "javascript-obfuscator ./js/script.bundle.js --output ./js/script.min.js",
+    "build": "yarn bundle && yarn obfuscate",
+    "watch": "chokidar './js/script.js' -c 'yarn build'",
+    "start": "yarn build && concurrently \"yarn start-server\" \"yarn watch\"",
+    "start-server": "http-server -o ./"
   },
   "devDependencies": {
     "chokidar-cli": "^3.0.0",
-     "http-server": "^14.1.1",
+    "esbuild": "^0.24.0",
+    "http-server": "^14.1.1",
     "javascript-obfuscator": "^4.1.1"
   }
 }

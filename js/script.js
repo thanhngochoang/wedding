@@ -29,7 +29,7 @@ function autoPlay() {
             }
         }, 200); 
     };
-    audio.volume = 0.4;
+    audio.volume = 0.5;
     audio.play().then(() => {
         increaseVolume();
     }).catch(error => {
