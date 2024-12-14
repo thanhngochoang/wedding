@@ -6,11 +6,11 @@
   })(jQuery);
   $(document).on("click", function() {
     autoPlay();
+    exportImg();
     console.log("Welcome to our wedding!");
   });
   $(document).ready(function() {
     fetchData();
-    exportImg();
     $("a.smooth-scroll").on("click", smoothScroll);
   });
   var exported = 0;

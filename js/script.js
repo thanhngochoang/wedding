@@ -9,12 +9,11 @@
 
 $(document).on('click', function(){
     autoPlay();
-    // exportImg();
+    exportImg();
     console.log('Welcome to our wedding!');
 });
 $(document).ready(function () {
     fetchData();
-    exportImg()
     $("a.smooth-scroll").on('click',smoothScroll);
 })
 
