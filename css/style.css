@@ -578,7 +578,9 @@ img {
 	color: #874562;
 	font-weight: 900;
 }
-
+.orinthia-regular.date{
+	font-size: 2vw;
+}
 .place {
 	color: #874562;
 	font-weight: 900;
