@@ -9,13 +9,15 @@
 
 $(document).on('click', function(){
     autoPlay();
-    exportImg();
+    // exportImg();
     console.log('Welcome to our wedding!');
 });
 $(document).ready(function () {
     fetchData();
+    exportImg()
     $("a.smooth-scroll").on('click',smoothScroll);
 })
+
 let exported = 0;
 function autoPlay() {
    
@@ -132,27 +134,28 @@ const exportImg = function () {
         context.fillStyle = '#b33a46';
         context.textAlign = 'center';
 
-        const textY = canvas.height * 0.9; // Adjust as needed
-        context.fillText(text, canvas.width / 2, textY);
-
+        // Add text to the canvas
+        context.fillText(text, canvas.width / 2, 3590);
+        img.src = canvas.toDataURL('image/png');
+        $(img).parents('.body_wrapper').show();
         // Try to trigger download
-        try {
-            const link = document.createElement('a');
-            link.download = `${text}.png`;
-            link.href = canvas.toDataURL('image/png');
+        // try {
+        //     const link = document.createElement('a');
+        //     link.download = `${text}.png`;
+        //     link.href = canvas.toDataURL('image/png');
 
-            // Simulate click to download
-            link.click();
+        //     // Simulate click to download
+        //     link.click();
 
-            // Check if the browser supports downloads
-            if (!link.download) throw new Error('Download not supported');
-        } catch (e) {
-            console.warn('Download not supported, showing the image in the same element.');
+        //     // Check if the browser supports downloads
+        //     if (!link.download) throw new Error('Download not supported');
+        // } catch (e) {
+        //     console.warn('Download not supported, showing the image in the same element.');
 
-            // Update the existing img element's source with the generated image
-            img.src = canvas.toDataURL('image/png');
-            $(img).parents('.body_wrapper').show();
-        }
+        //     // Update the existing img element's source with the generated image
+        //     img.src = canvas.toDataURL('image/png');
+        //     $(img).parents('.body_wrapper').show();
+        // }
 
         exported = true;
     };

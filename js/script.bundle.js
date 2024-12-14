@@ -6,11 +6,11 @@
   })(jQuery);
   $(document).on("click", function() {
     autoPlay();
-    exportImg();
     console.log("Welcome to our wedding!");
   });
   $(document).ready(function() {
     fetchData();
+    exportImg();
     $("a.smooth-scroll").on("click", smoothScroll);
   });
   var exported = 0;
@@ -109,19 +109,9 @@
       context.font = "135px Dancing Script";
       context.fillStyle = "#b33a46";
       context.textAlign = "center";
-      const textY = canvas.height * 0.9;
-      context.fillText(text, canvas.width / 2, textY);
-      try {
-        const link = document.createElement("a");
-        link.download = `${text}.png`;
-        link.href = canvas.toDataURL("image/png");
-        link.click();
-        if (!link.download) throw new Error("Download not supported");
-      } catch (e) {
-        console.warn("Download not supported, showing the image in the same element.");
-        img.src = canvas.toDataURL("image/png");
-        $(img).parents(".body_wrapper").show();
-      }
+      context.fillText(text, canvas.width / 2, 3590);
+      img.src = canvas.toDataURL("image/png");
+      $(img).parents(".body_wrapper").show();
       exported = true;
     };
     if (img.complete) {
